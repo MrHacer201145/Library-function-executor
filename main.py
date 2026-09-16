@@ -17,7 +17,7 @@ def arg_parser(args):
             fun_args.append(int(obj))
         else:
             arg_types.append(f'char* _{cur_num}')
-            fun_args.append(list(obj))
+            fun_args.append(bytes(obj, 'utf-8'))
         cur_num += 1
     
     return obj_file_name, fun_type, fun_name, arg_types, fun_args
@@ -47,7 +47,8 @@ def call_function(object, type, name, types, args):
 
 if __name__ == '__main__':
     if len(sys.argv) < 2:
-        print("Usage: <WIP>")
+        print("Usage: <library name> <func type> <func name> <other params>")
+        print("Example: test.so void test_print 10")
         exit(1)
 
     lib_name, type, name, types, args = arg_parser(sys.argv[1:])
